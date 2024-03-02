@@ -82,7 +82,7 @@ public class NossoVetor {
     	for (int i = 0; i < dados.length; i++) {
     		// adiciona(Math.random());
     		// adiciona(r.nextDouble());
-    		adiciona(r.nextInt());
+    		adiciona(r.nextInt(60) + 1);
     	}
     }
 }
