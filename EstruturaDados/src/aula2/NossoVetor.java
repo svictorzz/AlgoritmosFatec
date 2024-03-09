@@ -85,4 +85,22 @@ public class NossoVetor {
     		adiciona(r.nextInt(dados.length * 10) + 1);
     	}
     }
+    
+ // metodos de ordenação
+    
+    // Selectionsort
+    public void selectionSort() {
+    	//int cont = 0;
+    	for(int i = 0; i < dados.length - 1; i++) {
+    		int min = i;
+    		for(int j = i+ 1; j < dados.length; j++) {
+    			//cont++;
+    			if(dados[j] < dados[min]) min = j;
+    		}
+    		double temp = dados[min];
+    		dados[min] = dados[i];
+    		dados[i] = temp;
+    	}
+    	// return cont;
+    }
 }
