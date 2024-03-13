@@ -88,12 +88,12 @@ public class NossoVetor {
     
  // metodos de ordenação
     
-    // Selectionsort
+    // Selection sort
     public void selectionSort() {
     	//int cont = 0;
     	for(int i = 0; i < dados.length - 1; i++) {
     		int min = i;
-    		for(int j = i+ 1; j < dados.length; j++) {
+    		for(int j = i + 1; j < dados.length; j++) {
     			//cont++;
     			if(dados[j] < dados[min]) min = j;
     		}
@@ -102,5 +102,31 @@ public class NossoVetor {
     		dados[i] = temp;
     	}
     	// return cont;
+    }
+
+    // Insertion sort
+    public void insertionSort(){
+        for (int i = 1; i < dados.length; i++) {
+            int j = i - 1;
+            double temp = dados[i];
+            while (j >= 0 && dados[j] > temp){
+                dados[j + 1] = dados[j];
+                j--;
+            }
+            dados[j + 1] = temp;
+        }
+    }
+
+    // Bubble sort
+    public void bubbleSort(){
+        for (int i = 1; i < dados.length; i++) {
+            for (int j = 0; j < dados.length - 1; j++) {
+                if (dados[j] > dados[j + 1]){
+                    double temp = dados[j];
+                    dados[j] = dados[j + 1];
+                    dados[j + 1] = temp;
+                }
+            }
+        }
     }
 }
