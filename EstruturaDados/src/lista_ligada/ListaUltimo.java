@@ -20,12 +20,10 @@ public class ListaUltimo extends Lista{
 		Node novo = new Node(i, null);
 		if (estaVazia()) {
 			super.setPrimeiro(novo);
+			ultimo = novo;
 		} else {
-			Node aux = super.getPrimeiro();
-			while(aux.getProximo() != null) {
-				aux = aux.getProximo();
-			}
-			aux.setProximo(novo);
+			ultimo.setProximo(novo);
+			ultimo = novo;
 		}
 	}
 }
