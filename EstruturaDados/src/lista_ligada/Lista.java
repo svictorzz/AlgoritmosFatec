@@ -36,7 +36,29 @@ public class Lista {
 			aux.setProximo(novo);
 		}
 	}
-	
+
+	public int removeInicio(){
+		int info = primeiro.getInfo();
+		primeiro = primeiro.getProximo();
+		return info;
+	}
+
+	public int removeFim(){
+		int temp;
+		if (primeiro.getProximo() == null){
+			temp = primeiro.getInfo();
+			primeiro = null;
+		} else {
+			Node aux = primeiro;
+			while(aux.getProximo().getProximo() != null){
+				aux = aux.getProximo();
+			}
+			temp = aux.getProximo().getInfo();
+			aux.setProximo(null);
+		}
+		return temp;
+	}
+
 	@Override
 	public String toString() {
 		String s = "lista: ";
