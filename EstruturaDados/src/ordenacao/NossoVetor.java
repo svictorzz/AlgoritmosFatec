@@ -80,6 +80,11 @@ public class NossoVetor {
     		adiciona(r.nextInt(dados.length * 10) + 1);
     	}
     }
+
+    public void esvaziaVetor() {
+        ultPos = -1;
+        dados = new double[dados.length];
+    }
     
  // metodos de ordenação
     
@@ -122,6 +127,32 @@ public class NossoVetor {
                     dados[j + 1] = temp;
                 }
             }
+        }
+    }
+
+    // Quick sort
+
+    private int partition(int p, int r){
+        double pivot = dados[r];
+        int i = p - 1;
+        for (int j = p; j < r; j++) {
+            if (dados[j] <= pivot){
+                i++;
+                double temp = dados[i];
+                dados[i] = dados[j];
+                dados[j] = temp;
+            }
+        }
+        double temp = dados[i+ 1];
+        dados[i + 1] = dados[r];
+        dados[r] = temp;
+        return i + 1;
+    }
+    public void quickSort(int p, int r){
+        if (p < r){
+            int q = partition(p,r);
+            quickSort(p, q-1);
+            quickSort(q+1, r);
         }
     }
 }
