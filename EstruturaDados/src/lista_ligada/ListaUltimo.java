@@ -16,16 +16,6 @@ public class ListaUltimo extends Lista{
 	}
 
 	@Override
-	public int removeInicio(){
-		int temp = super.getPrimeiro().getInfo();
-		super.setPrimeiro(getPrimeiro().getProximo());
-		if (estaVazia()){
-			ultimo = null;
-		}
-		return temp;
-	}
-
-	@Override
 	public void insereFim(int i) {
 		Node novo = new Node(i, null);
 		if (estaVazia()) {

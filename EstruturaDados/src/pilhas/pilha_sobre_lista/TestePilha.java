@@ -7,7 +7,6 @@ public class TestePilha {
     public static void main(String[] args) {
         Random random = new Random();
         Pilha pilha = new Pilha();
-
         do {
             if (random.nextBoolean())
                 pilha.empilha(random.nextInt(10));

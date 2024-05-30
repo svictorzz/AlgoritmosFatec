@@ -12,7 +12,6 @@ public class Ordenacao {
 
 		NossoVetor vetor;
 
-
 		System.out.print("Digite o tamanho do vetor: ");
 		int n = sc.nextInt();
 		
@@ -27,7 +26,7 @@ public class Ordenacao {
 			System.out.println("Vetor ordenado pelo selection \n" + vetor);
 			System.out.println("Selection demorou " + (fim - inicio) + " ms" );
 
-			vetor.esvaziaVetor();
+			//vetor.esvaziaVetor();
 			vetor.preencheVetor();
 			System.out.println("2o vetor gerado \n" + vetor);
 
@@ -37,7 +36,7 @@ public class Ordenacao {
 			System.out.println("Vetor ordenado pelo insertion \n" + vetor);
 			System.out.println("Insertion demorou " + (fim2 - inicio2) + " ms" );
 
-			vetor.esvaziaVetor();
+			//vetor.esvaziaVetor();
 			vetor.preencheVetor();
 			System.out.println("3o vetor gerado \n" + vetor);
 
@@ -47,12 +46,12 @@ public class Ordenacao {
 			System.out.println("Vetor ordenado pelo bubble \n" + vetor);
 			System.out.println("Bubble demorou " + (fim3 - inicio3) + " ms" );
 
-			vetor.esvaziaVetor();
+			//vetor.esvaziaVetor();
 			vetor.preencheVetor();
 			System.out.println("4o vetor gerado \n" + vetor);
 
 			Long inicio4 = new Date().getTime();
-			vetor.quickSort(0, n-1);
+			//vetor.quickSort(0, n-1);
 			Long fim4 = new Date().getTime();
 			System.out.println("Vetor ordenado pelo quick \n" + vetor);
 			System.out.println("Quick demorou " + (fim4 - inicio4) + " ms" );

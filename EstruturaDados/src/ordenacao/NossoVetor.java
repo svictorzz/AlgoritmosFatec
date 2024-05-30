@@ -2,157 +2,252 @@ package ordenacao;
 
 import java.util.Random;
 
-public class NossoVetor {
-	
-    private int ultPos;
+public class NossoVetor{
+    private int ultimaPosicao;
     private double[] dados;
-    
+
     public NossoVetor (int capacidade){
-        ultPos = -1;
+        ultimaPosicao = -1;
         dados = new double[capacidade];
     }
-    
-    //métodos de acesso
-    public int getUltPos(){
-        return ultPos;
+
+    //metodos de acesso 
+    public double getUltimaPosicao(){
+        return ultimaPosicao;
     }
+
     public double[] getDados(){
         return dados;
     }
-    
-    //métodos modificadores
-    public void setUltPos(int pos){
-        if (pos>=0 && pos < dados.length){
-            ultPos = pos;
-        }
-        else{
-            ultPos = dados.length-1;
-        }
-    }
-    
+
     @Override
     public String toString(){
         String s = "";
-        if (estaVazio()) 
-			s = s + "vetor vazio";
+        if(estaVazio()){
+            s = s + "vetor vazio!";
+        }
         else
-        	for (int i = 0; i <= ultPos;i++)
-        		s = s + String.format("%.0f ", dados[i]);
-        return s + "\n";
+            for (int i = 0; i<=ultimaPosicao; i++)
+                s = s + String.format("%.0f ", dados[i]);
+            return s + "\n";
+        
     }
-    
+
     public boolean estaCheio(){
-        return ultPos == dados.length - 1;
+        if(ultimaPosicao == dados.length-1){
+            return true;
+        }
+        else{
+            return false;
+        }
+        //return ultimaPosicao == dados.length-1; (mesma coisa que o cod acima)
     }
-    
+
     public boolean estaVazio(){
-        return ultPos == -1;
+        if(ultimaPosicao == -1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    
-    private void redimensiona (int novaCapacidade) {
-    	double[] temp = new double[novaCapacidade];
-    	for (int i = 0; i <= ultPos; i++) {
-    		temp[i] = dados[i];
-    	}
-    	dados = temp;
+
+    private void redimensiona(int novaCapacidade){
+        double[] temp = new double [novaCapacidade];
+            for(int i =0; i<= ultimaPosicao; i++)
+                temp[i] = dados[i];
+            dados = temp;
     }
-    
+
     public void adiciona (int e){
-        if(estaCheio()) redimensiona(dados.length * 2);
-        dados[++ultPos] = e;
+        if(estaCheio()){
+            redimensiona(dados.length*2);
+        }
+        dados[++ultimaPosicao] = e;
+    }
+
+    public void adiciona (double e){
+        if(estaCheio()){
+            redimensiona(dados.length*2);
+        }
+        dados[++ultimaPosicao] = e;
     }
 
     public double remove(){
-        if (estaVazio()) return -1;
-        double aux = dados[ultPos--];
-        
-        if (dados.length >= 10 && ultPos <= dados.length / 4) 
-        	redimensiona(dados.length / 2);
+        if(estaVazio()){
+            return -1;
+        }
+        double aux = dados[(int) ultimaPosicao--];
+        if(dados.length >= 10 && ultimaPosicao <= dados.length/4){
+            redimensiona(dados.length/2);
+        }
         return aux;
-      }
-    
-    // metodo para inserir valores randomicos no vetor
-    public void preencheVetor () {
-    	Random r = new Random();
-    	for (int i = 0; i < dados.length; i++) {
-    		// adiciona(Math.random());
-    		// adiciona(r.nextDouble());
-    		adiciona(r.nextInt(dados.length * 10) + 1);
-    	}
     }
 
-    public void esvaziaVetor() {
-        ultPos = -1;
-        dados = new double[dados.length];
-    }
-    
- // metodos de ordenação
-    
-    // Selection sort
-    public void selectionSort() {
-    	//int cont = 0;
-    	for(int i = 0; i < dados.length - 1; i++) {
-    		int min = i;
-    		for(int j = i + 1; j < dados.length; j++) {
-    			//cont++;
-    			if(dados[j] < dados[min]) min = j;
-    		}
-    		double temp = dados[min];
-    		dados[min] = dados[i];
-    		dados[i] = temp;
-    	}
-    	// return cont;
-    }
-
-    // Insertion sort
-    public void insertionSort(){
-        for (int i = 1; i < dados.length; i++) {
-            int j = i - 1;
-            double temp = dados[i];
-            while (j >= 0 && dados[j] > temp){
-                dados[j + 1] = dados[j];
-                j--;
-            }
-            dados[j + 1] = temp;
+    //metodo para inserir valores randomicos no vetor
+    public void preencheVetor(){
+        Random r = new Random();
+        for(int i = 0; i < dados.length; i++){
+           adiciona(r.nextInt(dados.length*10) + 1);
         }
     }
 
-    // Bubble sort
-    public void bubbleSort(){
-        for (int i = 1; i < dados.length; i++) {
-            for (int j = 0; j < dados.length - 1; j++) {
-                if (dados[j] > dados[j + 1]){
-                    double temp = dados[j];
-                    dados[j] = dados[j + 1];
-                    dados[j + 1] = temp;
+    public int selectionSort(){
+       int cont = 0;
+        for(int i = 0; i < dados.length-1; i++){
+            int min = i;
+
+            for(int j = i + 1; j < dados.length; j++){
+                cont++;
+                if(dados[j] < dados [min]){
+                    min = j;
                 }
             }
+
+            double temp = dados[min];
+            dados[min] = dados[i];
+            dados[i] = temp;
         }
+        return cont;
     }
 
-    // Quick sort
+    public void insertionSort(){
 
-    private int partition(int p, int r){
-        double pivot = dados[r];
-        int i = p - 1;
-        for (int j = p; j < r; j++) {
-            if (dados[j] <= pivot){
-                i++;
-                double temp = dados[i];
-                dados[i] = dados[j];
-                dados[j] = temp;
+        for (int j = 1; j < dados.length; ++j) {
+            double x = dados[j];
+            int i;
+            for (i = j-1; i >= 0 && dados[i] > x; --i) {
+               dados[i+1] = dados[i];
+            }
+            dados[i+1] = x;
+         }
+    }
+
+    public void bubbleSort(){
+        double aux = 0;
+         for(int i=0; i < dados.length; i++){
+                 for(int x=1; x < (dados.length-i); x++){
+                          if(dados[x-1] > dados[x]){
+                                 aux = dados[x-1];
+                                 dados[x-1] = dados[x];
+                                 dados[x] = aux;
+                         }
+                 }
+         }
+    }
+
+    //1. Inserir um elemento em uma determinada posição
+    public void insereEmPosicao(int elemento, int posicao) {
+        if (estaCheio()) {
+            redimensiona(dados.length * 2);
+        } //verifica se está cheio, igual no metodo adiciona comum
+        for (int i = ultimaPosicao; i >= posicao; i--) {
+            dados[i + 1] = dados[i]; //mov e os elementos da esquerda pra direita 
+        }
+        dados[posicao] = elemento;
+        ultimaPosicao++;
+    }
+
+    // 2. Verificar quantas vezes um elemento aparece no vetor
+    public int contarOcorrencias(double elemento) {
+        int contagem = 0;
+        for (int i = 0; i <= ultimaPosicao; i++) {
+            if (dados[i] == elemento) {
+                contagem++;
             }
         }
-        double temp = dados[i+ 1];
-        dados[i + 1] = dados[r];
-        dados[r] = temp;
-        return i + 1;
+        return contagem;
     }
-    public void quickSort(int p, int r){
-        if (p < r){
-            int q = partition(p,r);
-            quickSort(p, q-1);
-            quickSort(q+1, r);
+
+    //3. Remover um elemento de uma determinada posição
+    public double removeEmPosicao(int posicao) {
+        if(estaVazio()){
+            return -1;
+        }
+        double elementoRetirado = dados[posicao];
+        for (int i = posicao; i < ultimaPosicao; i++) {
+            dados[i] = dados[i+1];
+        }
+        ultimaPosicao--;
+        return elementoRetirado;
+    }
+
+    //4. Remover a primeira ocorrência de um determinado elemento
+    public void removePrimeiraOcorrencia(int elemento) {
+        for (int i = 0; i <= ultimaPosicao; i++) {
+            if (dados[i] == elemento) {
+                removeEmPosicao(i);
+            }
         }
     }
+
+    //5. Remover todas as ocorrências de um determinado elemento
+    public void removeTodasOcorrencias(int elemento) {
+        for (int i = 0; i <= ultimaPosicao; ) {
+            if (dados[i] == elemento) {
+                removeEmPosicao(i);
+            } else {
+                i++;
+            }
+        }
+    }
+
+   // 8. Devolver o tamanho atual da lista de valores (quantos elementos ela tem)
+    public int tamanho() {
+        return ultimaPosicao + 1;
+    }
+
+    // 9. Esvaziar a lista.
+    public void esvaziar(){
+        ultimaPosicao = -1;
+    }
+
+    // 11. Reduzir o vetor ao tamanho dele
+    public void reduzirTamanhoAtual(){
+        int tamanhoAtual = ultimaPosicao + 1;
+        double[] temp = new double[tamanhoAtual];
+        for (int i = 0; i < tamanhoAtual; i++) {
+            temp[i] = dados[i];
+        }
+        dados = temp;
+    }
+
+
+    //13. Somar os elementos do vetor
+    public double somarElementos() {
+        double soma = 0;
+        for (int i = 0; i <= ultimaPosicao; i++) {
+            soma = soma + dados[i];
+        }
+        return soma;
+    }
+
+    //14. Encontrar o maior elemento armazenado
+    public double maiorElemento() {
+        double maior = dados[0];
+        for (int i = 1; i <= ultimaPosicao; i++) {
+            if(dados[i] > maior){ 
+                maior = dados[i]; 
+            } 
+        }
+        return maior;
+    }
+
+    //15. Encontrar a posição do maior elemento armazenado
+    public double maiorElementoPosicao() {
+        double maior = dados[0];
+        double posicaoMaior = 0;
+        for (int i = 1; i <= ultimaPosicao; i++) {
+            if(dados[i] > maior){ 
+                maior = dados[i]; 
+                posicaoMaior = i;
+            } 
+        }
+        return posicaoMaior;
+    }
 }
+
+
+
+
+
