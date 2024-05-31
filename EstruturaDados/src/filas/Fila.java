@@ -58,6 +58,29 @@ public class Fila{
         return p; //retorna a referencia da Pessoa
     }
 
+    // 17. intercalar vetores
+    public static Pessoa[] intercalar(Pessoa[] v1, Pessoa[] v2) {
+        int tamanho1 = v1.length;
+        int tamanho2 = v2.length;
+        Pessoa[] intercalado = new Pessoa[tamanho1 + tamanho2];
+        int i = 0, j = 0, k = 0;
+
+        while (i < tamanho1 && j < tamanho2) {
+            intercalado[k++] = v1[i++];
+            intercalado[k++] = v2[j++];
+        }
+
+        while (i < tamanho1) {
+            intercalado[k++] = v1[i++];
+        }
+
+        while (j < tamanho2) {
+            intercalado[k++] = v2[j++];
+        }
+
+        return intercalado;
+    }
+
     @Override
     public String toString(){
         String s = "";

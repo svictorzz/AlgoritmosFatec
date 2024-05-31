@@ -52,6 +52,7 @@ public class Fila {
         }
     }
 
+
     //17. Intercalar 2 filas
     public static Fila intercalarFilas(Fila f1, Fila f2) {
         Fila intercalada = new Fila();
@@ -103,6 +104,7 @@ class No {
     public void setInfo(Pessoa info) {
         this.info = info;
     }
+
 
     public void setProximo(No proximo) {
         this.proximo = proximo;
