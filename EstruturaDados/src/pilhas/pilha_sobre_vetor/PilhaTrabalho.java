@@ -1,31 +1,25 @@
 package pilhas.pilha_sobre_vetor;
 
+import static pilhas.pilha_sobre_vetor.Pilha.esvaziarMenor;
+
 public class PilhaTrabalho {
     public static void main(String[] args) {
-        Pilha pilha = new Pilha(50);
+        Pilha p1 = new Pilha();
+        Pilha p2 = new Pilha();
 
-        // 25 inserções
-        for (int i = 0; i < 25; i++) {
-            pilha.empilha(i);
-        }
+        p1.empilha(1);
+        p1.empilha(2);
+        p2.empilha(3);
+        p2.empilha(4);
+        p2.empilha(5);
 
-        // 12 exibições de tamanho (não afetam a pilha)
-        for (int i = 0; i < 12; i++) {
-            System.out.println("Tamanho: " + pilha.tamanho());
-        }
+        System.out.println("Pilha 1 antes: \n" + p1);
+        System.out.println("Pilha 2 antes: \n" + p2);
 
-        // 10 remoções, 3 delas resultando em "pilha vazia"
-        for (int i = 0; i < 10; i++) {
-            try {
-                pilha.desempilha();
-            } catch (RuntimeException e) {
-                System.out.println("Pilha vazia na tentativa de remoção " + (i + 1));
-            }
-        }
+        esvaziarMenor(p1, p2);
 
-        // Exibir a posição do topo ao final
-        System.out.println("Posição do topo ao final: " + pilha.getTopo());
+        System.out.println("Pilha 1 depois: \n" + p1);
+        System.out.println("Pilha 2 depois: \n" + p2);
 
     }
 }
-

@@ -20,6 +20,10 @@ public class NossoVetor{
         return dados;
     }
 
+    public int getComprimento(){
+        return dados.length;
+    }
+
     @Override
     public String toString(){
         String s = "";
